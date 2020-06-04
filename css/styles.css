@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+}
+
+img {
+  max-width: 500px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cabin", sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+p,
+a {
+  font-family: "Open Sans", sans-serif;
+}
+
+.header {
+  padding: 15px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar-list {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding-left: 0;
+  font-size: 1.2em;
+}
+
+.navbar-list li {
+  margin: 0px 20px;
+}
+
+.navbar-list li a {
+  text-decoration: none;
+  color: black;
+}
