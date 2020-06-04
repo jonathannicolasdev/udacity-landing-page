@@ -49,3 +49,25 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 160px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: 5em;
+  color: #334ac0;
+}
+
+.hero-content h2 {
+  font-size: 1.5em;
+  font-weight: normal;
+}
