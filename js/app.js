@@ -21,24 +21,11 @@
 let sectionElements;
 let navBarList;
 
-// "let" is not scoped into the function
-
 /**
  * End Global Variables
  * Start Helper Functions
  *
  */
-
-const getSectionNames = () => {
-  let sectionNames = [];
-
-  sectionElements.forEach((element) => {
-    const dataNavText = element.getAttribute("data-nav");
-    sectionNames.push(dataNavText);
-  });
-
-  return sectionNames;
-};
 
 /**
  * End Helper Functions
@@ -46,19 +33,60 @@ const getSectionNames = () => {
  *
  */
 
-// build the nav
+// 1. Build the nav
 
 const buildNavigationMenuLinks = () => {
   sectionElements.forEach((element) => {
     const sectionId = element.getAttribute("id");
-    const sectionTitle = element.getAttribute("data-nav");
-    const navListElement = `<li><a href="#${sectionId}">${sectionTitle}</a></li>`;
+    const sectionName = element.getAttribute("data-nav");
+    const navListElement = `<li><a href="#${sectionId}">${sectionName}</a></li>`;
+    navBarList.insertAdjacentHTML("beforeend", navListElement);
+  });
+};
+
+// 2. Scroll to anchor ID using scrollTO event
+
+const addScrollToLinks = () => {
+  const links = navBarList.querySelectorAll("a");
+  links.forEach((link) => {
+    const href = link.getAttribute("href");
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const section = document.querySelector(href);
+
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    });
   });
 };
 
 // Add class 'active' to section when near top of viewport
 
-// Scroll to anchor ID using scrollTO event
+const addActiveWhenInViewport = () => {
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry && entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    },
+    {
+      root: null,
+      threshold: 0,
+      rootMargin: "-150px",
+    }
+  );
+
+  sectionElements.forEach((section) => {
+    observer.observe(section);
+  });
+};
 
 /**
  * End Main Functions
@@ -67,19 +95,17 @@ const buildNavigationMenuLinks = () => {
  */
 
 document.addEventListener("DOMContentLoaded", (event) => {
-  console.log("DOM fully loaded and parsed");
+  // DOM fully loaded and parsed
 
   sectionElements = document.querySelectorAll("section");
   navBarList = document.querySelector("#navbar-list");
-
-  const sectionNames = getSectionNames();
 
   // Build menu
   buildNavigationMenuLinks();
 
   // Scroll to section on link click
-  // ...
+  addScrollToLinks();
 
   // Set sections as active
-  // ...
+  addActiveWhenInViewport();
 });

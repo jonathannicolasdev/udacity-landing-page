@@ -25,7 +25,17 @@ a {
 }
 
 .header {
-  padding: 15px;
+  padding: 5px;
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 0 1.8rem rgba(0, 0, 0, 0.15);
+}
+
+.hero {
+  background-image: url("../images/hero.png");
+  background-position: center center;
+  background-size: cover;
 }
 
 .navbar {
@@ -76,10 +86,19 @@ a {
   display: flex;
   justify-content: center;
   padding: 100px;
+  transition: background-color 0.5s ease;
+}
+
+.section.active {
+  background-color: pink;
 }
 
 .section.dark {
   background: #f6f6f6;
+}
+
+.section.dark.active {
+  background-color: orchid;
 }
 
 .section div {
